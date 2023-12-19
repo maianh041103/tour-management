@@ -1,6 +1,7 @@
 import express, { Request, Response, Express } from "express";
 import sequelize from "./config/database";
 import dotenv from "dotenv";
+import Tour from "./models/tour.model";
 dotenv.config();
 const port: Number | String = process.env.PORT || 3000;
 const app: Express = express();
@@ -14,8 +15,19 @@ app.set('view engine', 'pug');
 sequelize;
 //End nhúng database
 
-app.get("/tours", (req: Request, res: Response) => {
-  res.render('client/tours/index');
+app.get("/tours", async (req: Request, res: Response) => {
+  const tours = await Tour.findAll({
+    where: {
+      deleted: false,
+      status: "active"
+    },
+    raw: true
+  });
+
+  res.render('client/tours/index', {
+    title: "Danh sách tour",
+    tours: tours
+  });
 })
 
 app.listen(port, () => {
