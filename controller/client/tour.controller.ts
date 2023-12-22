@@ -43,8 +43,11 @@ export const detail = async (req: Request, res: Response) => {
       deleted: false,
       status: "active",
       slug: slugTour
-    }
+    },
+    raw: true
   });
+  tourDetail["images"] = JSON.parse(tourDetail["images"]);
+  tourDetail["price_special"] = tourDetail["price"] * (1 - tourDetail["discount"] / 100);
 
   res.render("client/pages/tours/detail.pug", {
     pageTitle: "Chi tiết Tour",
