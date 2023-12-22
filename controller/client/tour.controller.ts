@@ -35,3 +35,19 @@ export const index = async (req: Request, res: Response) => {
     tours: tours
   });
 }
+
+export const detail = async (req: Request, res: Response) => {
+  const slugTour = req.params.slugTour;
+  const tourDetail = await Tour.findOne({
+    where: {
+      deleted: false,
+      status: "active",
+      slug: slugTour
+    }
+  });
+
+  res.render("client/pages/tours/detail.pug", {
+    pageTitle: "Chi tiết Tour",
+    tourDetail: tourDetail
+  })
+}
