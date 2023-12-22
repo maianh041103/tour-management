@@ -1,5 +1,5 @@
 import sequelize from "../config/database";
-import { DataTypes, INTEGER } from "sequelize";
+import { DataTypes } from "sequelize";
 
 const Tour = sequelize.define("Tour", {
   id: {
