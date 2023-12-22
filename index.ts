@@ -12,6 +12,10 @@ app.set('views', './views');
 app.set('view engine', 'pug');
 //End nhúng pug
 
+//Nhúng file tĩnh
+app.use(express.static("public"));
+//End nhúng file tĩnh
+
 //Nhúng route
 clientRoute(app);
 //End nhúng route
