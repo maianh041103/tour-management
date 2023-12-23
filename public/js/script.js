@@ -15,6 +15,23 @@ var imagesMain = new Swiper(".imagesMain", {
   },
 });
 
+//Hiện thông báo
+const showAlert = () => {
+  const alertAddCartSuccess = document.querySelector("[alert-add-cart-success]");
+  if (alertAddCartSuccess) {
+    alertAddCartSuccess.classList.remove("alert-hidden");
+  }
+  setTimeout(() => {
+    alertAddCartSuccess.classList.add("alert-hidden");
+  }, 3000)
+
+  const closeAlert = document.querySelector("[close-alert]");
+  closeAlert.addEventListener("click", (e) => {
+    alertAddCartSuccess.classList.add("alert-hidden");
+  })
+}
+//End hiện thông báo
+
 //Kiem tra co gio hang chua
 const cart = localStorage.getItem("cart");
 if (!cart) {
@@ -43,6 +60,8 @@ if (formAddTourToCart) {
       }
 
       localStorage.setItem("cart", JSON.stringify(cart));
+
+      showAlert();
     }
   })
 }
