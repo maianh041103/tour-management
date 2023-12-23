@@ -34,18 +34,6 @@ const showAlert = () => {
 }
 //End hiện thông báo
 
-//Cập nhật số lượng trên mini cart
-const updateQuantityMiniCart = () => {
-  const miniCart = document.querySelector("[mini-cart]");
-  const cart = JSON.parse(localStorage.getItem("cart"));
-  const quantity = cart.reduce((calc, item, index) => {
-    return calc + item.quantity;
-  }, 0)
-  miniCart.innerHTML = `(${quantity})`;
-}
-
-updateQuantityMiniCart();
-
 //End cập nhật số lượng
 
 //Kiem tra co gio hang chua
@@ -84,3 +72,15 @@ if (formAddTourToCart) {
   })
 }
 //End thêm tour vào giỏ hàng
+
+//Cập nhật số lượng trên mini cart
+const updateQuantityMiniCart = () => {
+  const miniCart = document.querySelector("[mini-cart]");
+  const cart = JSON.parse(localStorage.getItem("cart"));
+  const quantity = cart.reduce((calc, item, index) => {
+    return calc + item.quantity;
+  }, 0)
+  miniCart.innerHTML = `(${quantity})`;
+}
+
+updateQuantityMiniCart();

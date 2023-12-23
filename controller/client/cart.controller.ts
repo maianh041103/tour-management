@@ -13,23 +13,25 @@ export const index = async (req: Request, res: Response) => {
 export const listJSON = async (req: Request, res: Response) => {
   const tours = req.body;
   let dataReturn = [];
-  for (let item of tours) {
-    const tour = await Tour.findOne({
-      where: {
-        id: item.tourId,
-        deleted: false,
-        status: "active"
-      },
-      raw: true
-    });
-    tour["price_special"] = tour["price"] * (1 - tour["discount"] / 100);
-    tour["images"] = JSON.parse(tour["images"]);
-    tour["total"] = tour["price_special"] * item.quantity;
-    tour["quantity"] = item.quantity;
-    dataReturn.push(tour);
-  }
+  if (tours) {
+    for (let item of tours) {
+      const tour = await Tour.findOne({
+        where: {
+          id: item.tourId,
+          deleted: false,
+          status: "active"
+        },
+        raw: true
+      });
+      tour["price_special"] = tour["price"] * (1 - tour["discount"] / 100);
+      tour["images"] = JSON.parse(tour["images"]);
+      tour["total"] = tour["price_special"] * item.quantity;
+      tour["quantity"] = item.quantity;
+      dataReturn.push(tour);
+    }
 
-  res.json({
-    data: dataReturn
-  })
+    res.json({
+      data: dataReturn
+    })
+  }
 }
