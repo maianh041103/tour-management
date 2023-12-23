@@ -32,6 +32,20 @@ const showAlert = () => {
 }
 //End hiện thông báo
 
+//Cập nhật số lượng trên mini cart
+const updateQuantityMiniCart = () => {
+  const miniCart = document.querySelector("[mini-cart]");
+  const cart = JSON.parse(localStorage.getItem("cart"));
+  const quantity = cart.reduce((calc, item, index) => {
+    return calc + item.quantity;
+  }, 0)
+  miniCart.innerHTML = `(${quantity})`;
+}
+
+updateQuantityMiniCart();
+
+//End cập nhật số lượng
+
 //Kiem tra co gio hang chua
 const cart = localStorage.getItem("cart");
 if (!cart) {
@@ -62,6 +76,8 @@ if (formAddTourToCart) {
       localStorage.setItem("cart", JSON.stringify(cart));
 
       showAlert();
+
+      updateQuantityMiniCart();
     }
   })
 }
