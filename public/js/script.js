@@ -1,3 +1,4 @@
+//Tạo slides
 var imagesThumb = new Swiper(".imagesThumb", {
   spaceBetween: 10,
   slidesPerView: 4,
@@ -14,6 +15,7 @@ var imagesMain = new Swiper(".imagesMain", {
     swiper: imagesThumb
   },
 });
+//End tạo slides
 
 //Hiện thông báo
 const showAlert = () => {

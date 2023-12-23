@@ -5,4 +5,6 @@ const route: Router = express.Router();
 
 route.get('/', controller.index);
 
+route.post('/list-json', controller.listJSON);
+
 export const CartRoutes = route;
