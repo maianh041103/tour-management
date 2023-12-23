@@ -111,3 +111,39 @@ const draw = () => {
 }
 
 draw();
+
+//Đặt hàng
+const formOrder = document.querySelector("[form-order]");
+if (formOrder) {
+  formOrder.addEventListener("submit", e => {
+    e.preventDefault();
+    const fullName = e.target.elements.fullName.value;
+    const phone = e.target.elements.phone.value;
+    const note = e.target.elements.note.value;
+
+    const cart = JSON.parse(localStorage.getItem("cart"));
+
+    const data = {
+      info: {
+        fullName: fullName,
+        phone: phone,
+        note: note
+      },
+      cart: cart
+    }
+
+    fetch("http://localhost:3000/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+      })
+  })
+}
+//End đặt hàng
