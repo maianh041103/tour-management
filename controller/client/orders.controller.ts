@@ -59,9 +59,46 @@ export const order = async (req: Request, res: Response) => {
 //[GET] /success
 export const success = async (req: Request, res: Response) => {
   const orderCode = req.query.orderCode;
-  console.log(orderCode);
+  const order = await Order.findOne({
+    where: {
+      code: orderCode,
+      deleted: false
+    },
+    raw: true
+  })
+
+  const listOrderItem = await OrderItem.findAll({
+    where: {
+      orderId: order["id"]
+    },
+    raw: true
+  });
+
+  for (const item of listOrderItem) {
+    const tour = await Tour.findOne({
+      where: {
+        id: item["tourId"],
+        deleted: false
+      },
+      raw: true
+    });
+    if (tour["images"])
+      item["image"] = JSON.parse(tour["images"])[0];
+    else
+      item["image"] = "";
+    item["slug"] = tour["slug"];
+    item["title"] = tour["title"];
+    item["price_special"] = item["price"] * (1 - item["discount"] / 100);
+    item["total"] = item["price_special"] * item["quantity"];
+  }
+
+  order["total"] = listOrderItem.reduce((calc, item, index) => {
+    return calc + item["total"];
+  }, 0);
 
   res.render("client/pages/order/success", {
-    pageTitle: "Đặt hàng thành công"
+    pageTitle: "Đặt hàng thành công",
+    order: order,
+    listOrderItem: listOrderItem
   });
 }
