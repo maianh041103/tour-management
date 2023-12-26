@@ -1,5 +1,7 @@
 import { Request, Response } from "express"
 import Tour from "../../models/tour.model"
+import Category from "../../models/category.model";
+import { generateTourCode } from "../../helper/generate.helper";
 
 //[GET] /admin/tours
 export const index = async (req: Request, res: Response) => {
@@ -21,4 +23,49 @@ export const index = async (req: Request, res: Response) => {
     pageTitle: "Danh sách tour",
     tours: tours
   })
+}
+
+//[GET] /admin/tours/create
+export const create = async (req: Request, res: Response) => {
+  const categories = await Category.findAll({
+    where: {
+      deleted: false
+    },
+    raw: true
+  })
+  res.render("admin/pages/tours/create.pug", {
+    pageTitle: "Thêm tour",
+    categories: categories
+  })
+}
+
+//[POST] /admin/tours/create
+export const createPOST = async (req: Request, res: Response) => {
+  const tour = req.body;
+  if (tour["position"]) {
+    tour["position"] = parseInt(tour["position"]);
+  } else {
+    const count = await Tour.count({
+      where: {
+        deleted: false
+      }
+    })
+    tour["position"] = count + 1;
+  }
+  const code = generateTourCode(tour["position"]);
+  const dataTour = {
+    title: tour.title,
+    code: code,
+    price: parseInt(tour["price"]),
+    discount: parseInt(tour["discount"]),
+    stock: parseInt(tour["stock"]),
+    timeStart: tour.timeStart,
+    position: tour["position"],
+    status: tour.status,
+    slug: ""
+  }
+
+  await Tour.create(dataTour);
+
+  res.send("OK");
 }
