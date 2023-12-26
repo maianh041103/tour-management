@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import clientRoute from "./route/client/index.route";
 import moment from 'moment';
 import bodyParser, { BodyParser } from "body-parser";
+import { systemConfig } from "./config/system";
+import { adminRoute } from "./route/admin/index.route";
 
 dotenv.config();
 const port: Number | String = process.env.PORT || 3000;
@@ -14,6 +16,7 @@ app.set('view engine', 'pug');
 //End nhúng pug
 
 app.locals.moment = moment;
+app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
 //Nhúng bodyParser
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -26,6 +29,7 @@ app.use(express.static("public"));
 
 //Nhúng route
 clientRoute(app);
+adminRoute(app);
 //End nhúng route
 
 
