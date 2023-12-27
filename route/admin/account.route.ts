@@ -7,4 +7,10 @@ route.get('/register', controller.register);
 
 route.post('/register', controller.regiterPOST);
 
+route.get("/login", controller.login);
+
+route.post("/login", controller.loginPOST);
+
+route.get("/logout", controller.logout);
+
 export const AccountRoutes = route;

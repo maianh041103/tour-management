@@ -21,7 +21,7 @@ const Account = sequelize.define("Account", {
     allowNull: false
   },
   phone: {
-    type: DataTypes.STRING(255)
+    type: DataTypes.STRING(15)
   },
   token: {
     type: DataTypes.STRING(255)

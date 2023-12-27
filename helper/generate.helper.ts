@@ -16,3 +16,13 @@ export const generateTourCode = (number: number): string => {
   const code = `TOUR${String(number).padStart(6, '0')}`;
   return code;
 };
+
+//Generate token
+export const generateToken = (number: number): string => {
+  const character = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
+  for (let i = 0; i < number; i++) {
+    result += character[Math.floor(Math.random() * character.length)];
+  }
+  return result;
+}
