@@ -5,6 +5,9 @@ import moment from 'moment';
 import bodyParser, { BodyParser } from "body-parser";
 import { systemConfig } from "./config/system";
 import { adminRoute } from "./route/admin/index.route";
+import session from "express-session";
+import cookieParser from "cookie-parser";
+import flash from "express-flash";
 
 dotenv.config();
 const port: Number | String = process.env.PORT || 3000;
@@ -22,6 +25,13 @@ app.locals.prefixAdmin = systemConfig.prefixAdmin;
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 //End nhúng bodyParser
+
+//Nhúng flash
+app.use(cookieParser('maianh20'));
+app.use(session({ cookie: { maxAge: 60000 } }));
+app.use(flash());
+app.locals.flash = flash;
+//End nhúng flash
 
 //Nhúng file tĩnh
 app.use(express.static("public"));

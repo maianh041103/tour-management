@@ -22,7 +22,7 @@ export const regiterPOST = async (req: Request, res: Response) => {
     await Account.create(req.body);
     res.redirect(`${systemConfig.prefixAdmin}/categories`);
   } else {
-    alert("Email đã tồn tại");
+    req["flash"]("error", "Email đã tồn tại");
     res.redirect("back");
   }
 }
