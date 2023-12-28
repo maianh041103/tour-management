@@ -49,6 +49,7 @@ block main
                     class="badge badge-success"
                     data-status=item.status 
                     data-id=item.id
+                    data-type="categories"
                   ) Hoạt động
                 else
                   a(
@@ -56,6 +57,7 @@ block main
                     class="badge badge-danger"
                     data-status=item.status 
                     data-id=item.id
+                    data-type="categories"
                   ) Dừng hoạt động
               td
                 a(
@@ -70,4 +72,5 @@ block main
                   class="btn btn-danger btn-sm ml-1"
                   button-delete
                   data-id=item.id
+                  data-type="categories"
                 ) Xóa

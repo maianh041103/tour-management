@@ -1,0 +1,57 @@
+extends ../../layouts/default
+include ../../mixins/moment.pug
+
+block main
+  if(tour)
+    if(tour.title)
+      h1(class="mb-4") #{tour.title}
+
+    if (tour.images)
+      div(class="mb-4")
+        each image in tour.images
+          img(
+            src=image 
+            style="width:200px; padding:20px;"
+          )
+    
+    if(tour.code)
+      div(class="mb-4") Code: <b>#{tour.code}</b>
+    
+    if(tour.price)
+      div(class="mb-4") Giá: <b>#{tour.price.toLocaleString()}đ</b>
+    
+    if(tour.discount)
+      div(class="mb-4") Giảm giá: <b>#{tour.discount}%</b>
+
+    if(tour.information)
+      div(class="mb-4") Thông tin : !{tour.information}
+
+    if(tour.schedule)
+      div(class="mb-4") Lịch trình : !{tour.schedule}
+    
+    if(tour.timeStart)
+      div(class="mb-4") Thời gian khởi hành : 
+        +formatDateTime(tour.timeStart)
+
+    if (tour.status)
+      div(class="mb-4")
+        span Trạng thái:
+        if (tour.status === "active")
+          span(class="btn btn-success") Hoạt động
+        else
+          span(class="btn btn-danger") Dừng hoạt động
+
+    if (tour.position)
+      div(class="mb-4") Vị trí: <b>#{tour.position}</b>
+
+    if (tour.stock)
+      div(class="mb-4") Số lượng còn : <b>#{tour.stock}</b>
+
+    a(
+      class="btn btn-warning btn-sm"
+      href = `${prefixAdmin}/tours/edit/${tour.id}`
+      ) Chỉnh sửa
+  else  
+    h1(class="mb-4") Không tìm thấy tour 
+
+    

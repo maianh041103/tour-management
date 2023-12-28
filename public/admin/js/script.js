@@ -51,7 +51,8 @@ if (buttonsDelete) {
       const check = confirm("Bạn có chắc chắn muốn xóa?");
       if (check) {
         const categoryId = button.getAttribute("data-id");
-        fetch(`http://localhost:3000/admin/categories/delete/${categoryId}`, {
+        const dataType = button.getAttribute("data-type");
+        fetch(`http://localhost:3000/admin/${dataType}/delete/${categoryId}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -80,7 +81,8 @@ if (buttonsChangeStatus) {
     button.addEventListener("click", e => {
       const dataStatus = button.getAttribute("data-status");
       const dataId = button.getAttribute("data-id");
-      fetch(`http://localhost:3000/admin/categories/change-status?id=${dataId}&status=${dataStatus}`, {
+      const dataType = button.getAttribute("data-type");
+      fetch(`http://localhost:3000/admin/${dataType}/change-status?id=${dataId}&status=${dataStatus}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
