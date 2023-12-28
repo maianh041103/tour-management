@@ -9,6 +9,7 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import flash from "express-flash";
 import path from "path";
+import methodOverride from "method-override";
 
 dotenv.config();
 const port: Number | String = process.env.PORT || 3000;
@@ -37,6 +38,10 @@ app.locals.flash = flash;
 //Nhúng file tĩnh
 app.use(express.static("public"));
 //End nhúng file tĩnh
+
+//Nhúng methodOverride
+app.use(methodOverride('_method'));
+//End nhúng methodOverride
 
 // TinyMCE
 app.use(
