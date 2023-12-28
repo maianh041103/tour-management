@@ -62,6 +62,8 @@ export const createPOST = async (req: Request, res: Response) => {
     price: parseInt(tour["price"]),
     discount: parseInt(tour["discount"]),
     stock: parseInt(tour["stock"]),
+    information: tour["information"],
+    schedule: tour["schedule"],
     timeStart: tour.timeStart,
     position: tour["position"],
     status: tour.status,

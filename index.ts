@@ -8,6 +8,7 @@ import { adminRoute } from "./route/admin/index.route";
 import session from "express-session";
 import cookieParser from "cookie-parser";
 import flash from "express-flash";
+import path from "path";
 
 dotenv.config();
 const port: Number | String = process.env.PORT || 3000;
@@ -36,6 +37,13 @@ app.locals.flash = flash;
 //Nhúng file tĩnh
 app.use(express.static("public"));
 //End nhúng file tĩnh
+
+// TinyMCE
+app.use(
+  "/tinymce",
+  express.static(path.join(__dirname, "node_modules", "tinymce"))
+);
+// End TinyMCE
 
 //Nhúng route
 clientRoute(app);
