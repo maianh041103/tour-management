@@ -29,6 +29,10 @@ const Account = sequelize.define("Account", {
   avatar: {
     type: DataTypes.STRING(255)
   },
+  role_id: {
+    type: DataTypes.INTEGER,
+    defaultValue: 1
+  },
   deleted: {
     type: DataTypes.BOOLEAN,
     defaultValue: false
