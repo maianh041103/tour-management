@@ -54,6 +54,7 @@ export const createPOST = async (req: Request, res: Response) => {
     })
     tour["position"] = count + 1;
   }
+
   const code = generateTourCode(tour["position"]);
   const dataTour = {
     title: tour.title,
@@ -64,6 +65,7 @@ export const createPOST = async (req: Request, res: Response) => {
     timeStart: tour.timeStart,
     position: tour["position"],
     status: tour.status,
+    images: JSON.stringify(tour["images"])
   }
 
   const newTour = await Tour.create(dataTour);
