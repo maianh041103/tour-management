@@ -2,6 +2,8 @@ import { Request, Response } from "express"
 import Tour from "../../models/tour.model"
 import Category from "../../models/category.model";
 import { generateTourCode } from "../../helper/generate.helper";
+import TourCategory from "../../models/tours-categories";
+import { systemConfig } from "../../config/system";
 
 //[GET] /admin/tours
 export const index = async (req: Request, res: Response) => {
@@ -62,10 +64,15 @@ export const createPOST = async (req: Request, res: Response) => {
     timeStart: tour.timeStart,
     position: tour["position"],
     status: tour.status,
-    slug: ""
   }
 
-  await Tour.create(dataTour);
+  const newTour = await Tour.create(dataTour);
 
-  res.send("OK");
+  //Thêm vào tours-categories
+  await TourCategory.create({
+    tour_id: newTour["id"],
+    category_id: req.body.category_id
+  });
+
+  res.redirect(`${systemConfig.prefixAdmin}/tours`);
 }
