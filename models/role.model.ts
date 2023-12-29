@@ -8,6 +8,9 @@ const Role = sequelize.define("Role", {
     primaryKey: true,
     autoIncrement: true
   },
+  title: {
+    type: DataTypes.STRING(255)
+  },
   description: {
     type: DataTypes.STRING(255)
   },
@@ -17,6 +20,9 @@ const Role = sequelize.define("Role", {
   deleted: {
     type: DataTypes.BOOLEAN,
     defaultValue: false
+  },
+  deletedAt: {
+    type: DataTypes.DATE
   }
 }, {
   tableName: "role",

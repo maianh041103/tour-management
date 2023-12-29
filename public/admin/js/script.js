@@ -52,6 +52,8 @@ if (buttonsDelete) {
       if (check) {
         const categoryId = button.getAttribute("data-id");
         const dataType = button.getAttribute("data-type");
+        console.log(categoryId);
+        console.log(dataType);
         fetch(`http://localhost:3000/admin/${dataType}/delete/${categoryId}`, {
           method: "DELETE",
           headers: {
