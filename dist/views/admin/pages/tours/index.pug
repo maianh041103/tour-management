@@ -1,0 +1,99 @@
+extends ../../layouts/default.pug
+block main 
+  if(account.role.permissions.includes("tours_view"))
+    h1(class="mb-4") #{pageTitle}
+
+    .card.mb-3 
+      .card-header Danh sách
+      .card-body 
+        .row  
+          .col-8 
+          
+          .col-4.text-right 
+            if(account.role.permissions.includes("tours_create"))
+              a(
+                href=`${prefixAdmin}/tours/create`
+                class="btn btn-outline-success"
+              ) + Thêm mới
+
+        table(
+          class="table table-hover table-sm mt-3"
+        )
+          thead   
+            tr 
+              th STT 
+              th Hình ảnh
+              th Tiêu đề
+              th Giá
+              th % Giảm giá
+              th Giá đặc biệt
+              th Còn lại
+              th Trạng thái
+              th Vị trí
+              th Hành động
+
+          tbody
+            each item,index in tours 
+              tr 
+                td #{index+1}
+                td 
+                  img(
+                    src=item.image 
+                    alt=item.title 
+                    width="100px"
+                    height="auto"
+                  )
+                td #{item.title}
+                td #{item.price.toLocaleString()}đ
+                td #{item.discount}%
+                td #{item.price_special.toLocaleString()}đ
+                td #{item.stock}
+                if(account.role.permissions.includes("tours_edit"))
+                  td 
+                    if(item.status === "active")
+                      a(
+                        href="javascript:;"
+                        data-status=item.status 
+                        data-id=item.id
+                        data-type="tours"
+                        class="badge badge-success"
+                      ) Hoạt động
+                    else 
+                      a(
+                        href="javascript:;"
+                        data-status=item.status 
+                        data-id=item.id
+                        data-type="tours"
+                        class="badge badge-danger"
+                      ) Dừng hoạt động
+                else
+                  td 
+                    if(item.status === "active")
+                      span(
+                        class="badge badge-success"
+                      ) Hoạt động
+                    else 
+                      a(
+                        class="badge badge-danger"
+                      ) Dừng hoạt động
+                td #{item.position}
+                td
+                  if(account.role.permissions.includes("tours_view"))
+                    a(
+                      class="btn btn-secondary btn-sm"
+                      href=`${prefixAdmin}/tours/detail/${item.id}`
+                    ) Chi tiết
+                  if(account.role.permissions.includes("tours_edit"))
+                    a(
+                      class="btn btn-warning btn-sm ml-1"
+                      href=`${prefixAdmin}/tours/edit/${item.id}`
+                    ) Sửa
+                  if(account.role.permissions.includes("tours_delete"))
+                    button(
+                      class="btn btn-danger btn-sm ml-1"
+                      button-delete
+                      data-id=item.id
+                      data-type="tours"
+                    ) Xóa
+  else 
+    h1 Bạn không có quyền truy cập vào trang này

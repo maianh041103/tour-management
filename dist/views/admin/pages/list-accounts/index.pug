@@ -1,0 +1,58 @@
+extends ../../layouts/default
+
+block main 
+  if(account.role.permissions.includes("account_view"))
+    h1(class="mb-4") Danh sách tài khoản
+    .card.mb-3
+      .card-header Danh sách
+      .card-body 
+        .row 
+        table(
+          class="table table-hover table-sm"
+        )
+          thead
+            tr 
+              th STT 
+              th Avatar 
+              th Họ tên
+              th Phân quyền
+              th Email 
+              th Hành động
+          tbody 
+            if(accounts)
+              each item,index in accounts 
+                tr 
+                  td #{index+1}
+                  td 
+                    img(
+                      src=item.avatar||"/images/th.jpg"
+                      alt=item.fullName
+                      width="100px"
+                      height="auto"
+                    )
+                  td #{item.fullName}
+                  td #{item.role.title}
+                  td #{item.email}
+                  td 
+                    a(
+                      class="btn btn-secondary btn-sm"
+                      href=`${prefixAdmin}/accounts/detail/${item.id}`
+                    ) Chi tiết
+                    if(account.role.permissions.includes("account_edit"))
+                      a(
+                        class="btn btn-warning btn-sm"
+                        href=`${prefixAdmin}/accounts/edit/${item.id}`
+                      ) Sửa
+                    if(account.role.permissions.includes("account_delete"))
+                      button(
+                        class="btn btn-danger btn-sm ml-1"
+                        button-delete
+                        data-id=item.id
+                        data-type="accounts"
+                      ) Xóa
+            else
+              tr
+                td(colspan="4" class="text-center") Chưa có tài khoản nào được tạo
+  else 
+    h1 Bạn không có quyền vào trang này     
+

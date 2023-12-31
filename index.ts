@@ -16,7 +16,7 @@ const port: Number | String = process.env.PORT || 3000;
 const app: Express = express();
 
 //Nhúng pug
-app.set('views', './views');
+app.set("views", `${__dirname}/views`);
 app.set('view engine', 'pug');
 //End nhúng pug
 
@@ -36,7 +36,7 @@ app.locals.flash = flash;
 //End nhúng flash
 
 //Nhúng file tĩnh
-app.use(express.static("public"));
+app.use(express.static(`${__dirname}/public`));
 //End nhúng file tĩnh
 
 //Nhúng methodOverride

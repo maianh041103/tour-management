@@ -1,0 +1,42 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main 
+  h1(class="mb-4") Thông tin cá nhân
+
+  if(account.avatar)
+    image(
+      src=account.avatar
+      alt="Ảnh đại diện"
+      width="150px"
+      class="mb-4"
+    )
+  else 
+    image(
+      src=`/images/th.jpg`
+      alt="Ảnh đại diện"
+      width="150px"
+      class="mb-4"
+    )
+
+  if(account.fullName)
+    p Họ tên: #{account.fullName}
+
+  if(account.email)
+    p Email: #{account.email}
+  
+  if(account.phone)
+    p Số điện thoại: #{account.phone}
+
+  if (account.role_id)
+    p Phân quyền: <b>#{account.role_id}</b>
+  div 
+    a(
+      href=`${prefixAdmin}/edit`
+      class="btn btn-primary"
+    ) Chỉnh sửa thông tin
+ 
+    a(
+      href=`${prefixAdmin}/change-password`
+      class="btn btn-primary"
+    ) Đổi mật khẩu

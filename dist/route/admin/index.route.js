@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.adminRoute = void 0;
+const category_route_1 = require("./category.route");
+const tour_route_1 = require("./tour.route");
+const system_1 = require("../../config/system");
+const account_route_1 = require("./account.route");
+const upload_route_1 = require("./upload.route");
+const role_route_1 = require("./role.route");
+const accounts_route_1 = require("./accounts.route");
+const dashboard_route_1 = require("./dashboard.route");
+const auth_middlerware_1 = require("../../middlerware/admin/auth.middlerware");
+const adminRoute = (app) => {
+    app.use(`${system_1.systemConfig.prefixAdmin}/categories`, auth_middlerware_1.auth, category_route_1.CategoryRoutes);
+    app.use(`${system_1.systemConfig.prefixAdmin}/tours`, auth_middlerware_1.auth, tour_route_1.TourRoutes);
+    app.use(`${system_1.systemConfig.prefixAdmin}`, account_route_1.AccountRoutes);
+    app.use(`${system_1.systemConfig.prefixAdmin}/upload`, auth_middlerware_1.auth, upload_route_1.UploadRoutes);
+    app.use(`${system_1.systemConfig.prefixAdmin}/roles`, auth_middlerware_1.auth, role_route_1.RoleRoutes);
+    app.use(`${system_1.systemConfig.prefixAdmin}/accounts`, auth_middlerware_1.auth, accounts_route_1.AccountsRouters);
+    app.use(`${system_1.systemConfig.prefixAdmin}/dashboard`, auth_middlerware_1.auth, dashboard_route_1.DashboardRoutes);
+};
+exports.adminRoute = adminRoute;

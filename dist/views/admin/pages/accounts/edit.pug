@@ -1,0 +1,71 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main 
+  h1(class="mb-4") Sửa thông tin cá nhân
+
+  form(
+    action=`${prefixAdmin}/edit?_method=PATCH`
+    method="POST"
+    enctype="multipart/form-data"
+  )
+    div(
+      class="form-group"
+      upload-image
+    )
+      label(for="avatar") Ảnh đại diện
+      input(
+        type="file"
+        class="form-control-file"
+        id="avatar"
+        name="avatar"
+        accept="image/*"
+        upload-image-input
+      )
+      img(
+        src=account.avatar
+        upload-image-preview
+        class="image-preview"
+      )
+      button(
+        delete-image
+        class="btn btn-danger"
+      ) x
+
+    
+    div(class='form-group')
+      label(for='fullName') Họ tên
+      input(
+        type='text'
+        id='fullName'
+        name='fullName'
+        class='form-control'
+        value=account.fullName
+      )
+    
+    div(class='form-group')
+      label(for='email') Email
+      input(
+        type='text'
+        id='email'
+        name='email'
+        class='form-control'
+        value=account.email
+      )
+
+    div(class='form-group')
+      label(for='phone') Số điện thoại
+      input(
+        type='text'
+        id='phone'
+        name='phone'
+        class='form-control'
+        value=account.phone
+      )
+    
+    div(class="from-group")
+      button(
+        type="submit"
+        class="btn btn-primary"
+      ) Sửa
+      
