@@ -3,7 +3,6 @@ import Account from "../../models/account.model";
 import { systemConfig } from "../../config/system";
 import md5 from "md5";
 import { generateToken } from "../../helper/generate.helper";
-import Role from "../../models/role.model";
 
 //[GET] /admin/accounts/register
 export const register = async (req: Request, res: Response) => {
