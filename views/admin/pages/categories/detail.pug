@@ -1,36 +1,40 @@
 extends ../../layouts/default
 
 block main
-  if(category)
-    if(category.title)
-      h1(class="mb-4") #{category.title}
+  if(account.role.permissions.includes("category_view"))
+    if(category)
+      if(category.title)
+        h1(class="mb-4") #{category.title}
 
-    if (category.image)
-      div(class="mb-4")
-        img(
-          src=category.image 
-          style="width:100px"
-        )
+      if (category.image)
+        div(class="mb-4")
+          img(
+            src=category.image 
+            style="width:100px"
+          )
 
-    if (category.status)
-      div(class="mb-4")
-        span Trạng thái:
-        if (category.status === "active")
-          span(class="btn btn-success") Hoạt động
-        else
-          span(class="btn btn-danger") Dừng hoạt động
+      if (category.status)
+        div(class="mb-4")
+          span Trạng thái:
+          if (category.status === "active")
+            span(class="btn btn-success") Hoạt động
+          else
+            span(class="btn btn-danger") Dừng hoạt động
 
-    if (category.position)
-      div(class="mb-4") Vị trí: <b>#{category.position}</b>
+      if (category.position)
+        div(class="mb-4") Vị trí: <b>#{category.position}</b>
 
-    if (category.description)
-      div(class="mb-4") !{category.description}
+      if (category.description)
+        div(class="mb-4") !{category.description}
 
-    a(
-      class="btn btn-warning btn-sm"
-      href = `${prefixAdmin}/categories/edit/${category.id}`
-      ) Chỉnh sửa
+      if(account.role.permissions.includes("category_edit"))
+        a(
+          class="btn btn-warning btn-sm"
+          href = `${prefixAdmin}/categories/edit/${category.id}`
+          ) Chỉnh sửa
+    else  
+      h1(class="mb-4") Không tìm thấy danh mục 
   else  
-    h1(class="mb-4") Không tìm thấy danh mục 
+    h1 Bạn không có quyền vào trang này
 
     
