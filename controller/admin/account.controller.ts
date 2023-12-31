@@ -25,7 +25,7 @@ export const regiterPOST = async (req: Request, res: Response) => {
     req.body["password"] = md5(req.body["password"]);
     req.body["token"] = generateToken(20);
     await Account.create(req.body);
-    res.redirect(`${systemConfig.prefixAdmin}/accounts/login`);
+    res.redirect(`${systemConfig.prefixAdmin}/login`);
   } else {
     req["flash"]("error", "Email đã tồn tại");
     res.redirect("back");
@@ -54,7 +54,7 @@ export const loginPOST = async (req: Request, res: Response) => {
   } else {
     if (emailExist["password"] === md5(req.body.password)) {
       res["cookie"]("token", emailExist["token"]);
-      res.redirect(`${systemConfig.prefixAdmin}/categories`);
+      res.redirect(`${systemConfig.prefixAdmin}/dashboard`);
     } else {
       req["flash"]("error", "Mật khẩu không chính xác");
       res.redirect("back");
@@ -65,7 +65,7 @@ export const loginPOST = async (req: Request, res: Response) => {
 //[GET] /admin/accounts/logout
 export const logout = async (req: Request, res: Response) => {
   res.clearCookie("token");
-  res.redirect(`${systemConfig.prefixAdmin}/accounts/login`);
+  res.redirect(`${systemConfig.prefixAdmin}/login`);
 }
 
 //[GET] /admin/accounts/info

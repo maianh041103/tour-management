@@ -31,7 +31,7 @@ const Account = sequelize.define("Account", {
   },
   role_id: {
     type: DataTypes.INTEGER,
-    defaultValue: 1
+    defaultValue: 2
   },
   deleted: {
     type: DataTypes.BOOLEAN,

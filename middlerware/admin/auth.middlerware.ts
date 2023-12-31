@@ -5,7 +5,7 @@ import Role from "../../models/role.model";
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
   if (!req.cookies.token) {
-    res.redirect(`${systemConfig.prefixAdmin}/accounts/login`);
+    res.redirect(`${systemConfig.prefixAdmin}/login`);
   } else {
     const account = await Account.findOne({
       where: {
