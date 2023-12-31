@@ -9,7 +9,8 @@ dotenv_1.default.config();
 const sequelize = new sequelize_1.Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
     host: process.env.DB_PASSWORD,
     port: 3309,
-    dialect: 'mysql'
+    dialect: 'mysql',
+    dialectModule: require('mysql2')
 });
 sequelize.authenticate().then(() => {
     console.log("Connect success");

@@ -9,7 +9,8 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_PASSWORD,
     port: 3309,
-    dialect: 'mysql'
+    dialect: 'mysql',
+    dialectModule: require('mysql2')
   }
 )
 
