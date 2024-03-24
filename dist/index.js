@@ -18,6 +18,11 @@ const method_override_1 = __importDefault(require("method-override"));
 dotenv_1.default.config();
 const port = process.env.PORT || 3000;
 const app = (0, express_1.default)();
+const cors = require('cors');
+const corsOptions = {
+    origin: 'https://tour-management-jes2-dbl3exmfe-maianh041103s-projects.vercel.app',
+};
+app.use(cors());
 app.set("views", `${__dirname}/views`);
 app.set('view engine', 'pug');
 app.locals.moment = moment_1.default;

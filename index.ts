@@ -15,6 +15,15 @@ dotenv.config();
 const port: Number | String = process.env.PORT || 3000;
 const app: Express = express();
 
+//Nhúng cors
+const cors = require('cors');
+
+const corsOptions = {
+  origin: 'https://tour-management-jes2-dbl3exmfe-maianh041103s-projects.vercel.app',
+}
+app.use(cors());
+//End nhúng cors
+
 //Nhúng pug
 app.set("views", `${__dirname}/views`);
 app.set('view engine', 'pug');
