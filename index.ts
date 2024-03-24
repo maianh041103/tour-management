@@ -21,6 +21,7 @@ const cors = require('cors');
 const corsOptions = {
   origin: 'https://tour-management-sigma.vercel.app',
 }
+
 app.use(cors());
 //End nhúng cors
 
