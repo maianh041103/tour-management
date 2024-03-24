@@ -44,7 +44,7 @@ const updateQuantityInput = () => {
 
 //Vẽ lại giao diện
 const draw = () => {
-  fetch("https://tour-management-iaknq3c6i-maianh041103.vercel.app/cart/list-json", {
+  fetch("https://tour-management-sigma.vercel.app/cart/list-json", {
     method: "POST",
     "headers": {
       "Content-Type": "application/json"
@@ -132,7 +132,7 @@ if (formOrder) {
       cart: cart
     }
 
-    fetch("https://tour-management-iaknq3c6i-maianh041103.vercel.app/order", {
+    fetch("https://tour-management-sigma.vercel.app/order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -20,7 +20,7 @@ const port = process.env.PORT || 3000;
 const app = (0, express_1.default)();
 const cors = require('cors');
 const corsOptions = {
-    origin: 'https://tour-management-jes2-dbl3exmfe-maianh041103s-projects.vercel.app',
+    origin: 'https://tour-management-sigma.vercel.app',
 };
 app.use(cors());
 app.set("views", `${__dirname}/views`);
